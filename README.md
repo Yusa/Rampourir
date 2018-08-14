@@ -5,7 +5,7 @@ Automated malware collection and classification with signature based scan.
 ### Malware Sources
 
 * [Malshare](https://malshare.com)
-* [Malakel](http://malwaredb.malekal.com/index.php?page=1)
+* [Malakel](http://malwaredb.malekal.com/index.php?page=1) => It is not being updated (Cumulative downloader will be written for contribution to database)
 * [Malc0de](http://malc0de.com/database/)
 * [Cybercrime-Tracker](https://cybercrime-tracker.net/)
 * [VX-Vault](http://vxvault.net/ViriList.php)

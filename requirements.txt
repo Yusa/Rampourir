@@ -1,8 +1,16 @@
 beautifulsoup4==4.6.3
 bs4==0.0.1
 certifi==2018.8.13
+cffi==1.11.5
 chardet==3.0.4
+cssselect==1.0.3
 idna==2.7
+lxml==4.2.4
 pprint==0.1
+progressbar==2.5
+pycparser==2.18
+pyquery==1.4.0
 requests==2.19.1
+six==1.11.0
+ssdeep==3.3
 urllib3==1.23
