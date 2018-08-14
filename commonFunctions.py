@@ -3,6 +3,7 @@ import requests
 import hashlib
 import os
 import progressbar
+import ssdeep
 
 _DB_NAME = "veritabani.db"
 _CON = None
@@ -40,6 +41,7 @@ def sampleDownloader(url):
 		return False
 	return False
 
+
 def hasher(fname):
     #HASH md5
     hash_md5 = hashlib.md5()
@@ -54,5 +56,13 @@ def hasher(fname):
         for chunk in iter(lambda: f.read(4096), b""):
             hash_sha256.update(chunk)
     hsha256 = hash_sha256.hexdigest()
-    return {"md5": hmd5, "sha256": hsha256}
+    
+    #HASH ssdeep
+    hssdeep = ssdeep.hash_from_file(fname)
 
+    #return value
+    return {"md5": hmd5, "sha256": hsha256, "ssdeep":hssdeep}
+
+
+def yaraScan():
+	return None
