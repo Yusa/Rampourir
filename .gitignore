@@ -4,3 +4,4 @@ configs
 veritabani.db
 *.pyc
 *.stamp
+rules/

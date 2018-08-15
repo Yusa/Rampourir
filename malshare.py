@@ -12,8 +12,13 @@ _HASHFNAME = "sha256Malshare.stamp"
 with open("configs", "r") as f:
 	CONFS = json.loads(f.read())
 
-_API_KEY = CONFS['MALSHARE-API']
+_API_KEY = CONFS['MALSHARE-API'][1]
 
+
+def change_key(index):
+	global _API_KEY
+	_API_KEY = CONFS['MALSHARE-API'][index]
+	
 
 def retrieve_hashes(url):
 	"""
@@ -49,18 +54,10 @@ def main():
 	_DATE = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
 	chdRes = checkDate(_DATE)
 	_URL = "https://malshare.com/daily/{}/malshare_fileList.{}.sha256.txt".format(_DATE, _DATE)
-	if chdRes == 1:
-		cursor = commonFunctions._CON.cursor()
-		cursor.execute("""INSERT INTO timestamps values (?)""", (_DATE,))
-		commonFunctions._CON.commit()
-	
-	elif chdRes == 2:
-		cursor = commonFunctions._CON.cursor()
-		cursor.execute("""UPDATE timestamps SET malshare = (?)""", (_DATE,))
-		commonFunctions._CON.commit()
-
-	else:
+	if chdRes == 0:
 		return
+
+	cursor = commonFunctions._CON.cursor()
 
 	if retrieve_hashes(_URL):
 		with open(_HASHFNAME, "r") as f:
@@ -68,15 +65,18 @@ def main():
 			for i,line in enumerate(hashlist):
 				try:
 					ln = len(hashlist)
-					line = "https://malshare.com/api.php?api_key={}&action=getfile&hash={}".format(_API_KEY,line)
+					change_key(i%4)
+					url = "https://malshare.com/api.php?api_key={}&action=getfile&hash={}".format(_API_KEY,line)
 					print '\r', "[*] {}/{} is in process. [*] ".format(i,ln),
 					sys.stdout.flush()
-					if commonFunctions.sampleDownloader(line.strip()):
-						oldFile = os.path.join(commonFunctions.SAVEPATH, "temp")
-						hashes = commonFunctions.hasher(oldFile)
-						newFile = os.path.join(commonFunctions.SAVEPATH, str(hashes["md5"]))
-						cursor.execute("""SELECT * FROM files WHERE md5sum=?""", (hashes["md5"],))
-						if cursor.fetchone() == None:
+					cursor.execute("""SELECT * FROM files WHERE sha256sum=?""", (line.strip(),))
+					data = cursor.fetchone()
+					if data == None:
+						if commonFunctions.sampleDownloader(url.strip()):
+							oldFile = os.path.join(commonFunctions.SAVEPATH, "temp")
+							hashes = commonFunctions.hasher(oldFile)
+							newFile = os.path.join(commonFunctions.SAVEPATH, str(hashes["md5"]))
+
 							os.rename(oldFile, newFile)
 							#print hashes
 							print "INSERTING"
@@ -88,12 +88,20 @@ def main():
 
 							cursor.execute("""INSERT INTO files values (?, ?, ?, ?, ?, ?, ?, ?)""", (hashes["md5"], hashes["sha256"], newFile, isDetected, ScanResult, _DATE, hashes["ssdeep"], None))
 							commonFunctions._CON.commit()
-						else:
-							os.remove(oldFile)
 
 				except Exception as e:
 					print e
 					print "[!] Error: malshare.py - main function - for loop!"
+
+		if chdRes == 1:
+			cursor.execute("""INSERT INTO timestamps values (?)""", (_DATE,))
+			commonFunctions._CON.commit()
+		
+		elif chdRes == 2:
+			cursor.execute("""UPDATE timestamps SET malshare = (?)""", (_DATE,))
+			commonFunctions._CON.commit()
+
+
 
 
 if __name__=="__main__":
