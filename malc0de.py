@@ -71,7 +71,7 @@ def main():
 		print "\n[*] Download is starting...[*]",
 		sys.stdout.flush()
 		for i, res in enumerate(result):
-			print '\r', "[*] {}/{} is downloaded. [*] ".format(i,len(result)),
+			print '\r', "[*] {}/{} is in process. [*] ".format(i,len(result)),
 			sys.stdout.flush()
 			if  commonFunctions.sampleDownloader(res.strip()):
 				oldfile = os.path.join(commonFunctions.SAVEPATH, "temp")

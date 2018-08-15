@@ -4,14 +4,14 @@ Automated malware collection and classification with signature based scan.
 
 ### Malware Sources
 
-* [Malshare](https://malshare.com)
-* [Malakel](http://malwaredb.malekal.com/index.php?page=1) => It is not being updated (Cumulative downloader will be written for contribution to database)
-* [Malc0de](http://malc0de.com/database/)
-* [Cybercrime-Tracker](https://cybercrime-tracker.net/)
-* [VX-Vault](http://vxvault.net/ViriList.php)
-* [Hybrid Analysis](https://hybrid-analysis.com)
+* [Malshare](https://malshare.com) => Added
+* [Malc0de](http://malc0de.com/database/) => Added
+* [VX-Vault](http://vxvault.net/ViriList.php) => Added
+* [Tracker-h3x](http://tracker.h3x.eu/about/400) => Added
+* [Malakel](http://malwaredb.malekal.com/index.php?page=1) => It is not being updated (Cumulative downloader will be written for contribution to database) => Added
 * [Any.Run](https://app.any.run/submissions)
-* [Tracker-h3x](http://tracker.h3x.eu/about/400)
+* [Hybrid Analysis](https://hybrid-analysis.com)
+* [Cybercrime-Tracker](https://cybercrime-tracker.net/) => canceled, not up to date
 
 ### Yara rule sources
 

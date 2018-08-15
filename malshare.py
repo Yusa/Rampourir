@@ -7,7 +7,6 @@ import sys
 import os 
 import json
 
-_HEADERS = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
 _HASHFNAME = "sha256Malshare.stamp"
 
 with open("configs", "r") as f:
@@ -25,7 +24,7 @@ def retrieve_hashes(url):
 			0 if there is a problem
 	"""
 	try:
-		response = requests.get(url, headers=_HEADERS)
+		response = requests.get(url, headers=commonFunctions._HEADERS)
 #		soup = BeautifulSoup(response.text, 'html.parser')
 		with open(_HASHFNAME, "w") as f:
 			f.write(response.text)
@@ -70,7 +69,7 @@ def main():
 				try:
 					ln = len(hashlist)
 					line = "https://malshare.com/api.php?api_key={}&action=getfile&hash={}".format(_API_KEY,line)
-					print '\r', "[*] {}/{} is downloaded. [*] ".format(i,ln),
+					print '\r', "[*] {}/{} is in process. [*] ".format(i,ln),
 					sys.stdout.flush()
 					if commonFunctions.sampleDownloader(line.strip()):
 						oldFile = os.path.join(commonFunctions.SAVEPATH, "temp")

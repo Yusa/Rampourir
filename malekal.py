@@ -58,7 +58,7 @@ def downloadSamples():
 			try:
 				ln = len(hashlist)
 				line = "{}{}".format(_DOWN_URL,line.strip())
-				print '\r', "[*] {}/{} is downloaded. [*] ".format(i,ln),
+				print '\r', "[*] {}/{} is in process. [*] ".format(i,ln),
 				sys.stdout.flush()
 				if commonFunctions.sampleDownloader(line.strip()):
 					oldFile = os.path.join(commonFunctions.SAVEPATH, "temp")

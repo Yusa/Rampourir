@@ -3,6 +3,8 @@ import os
 import commonFunctions
 import malshare
 import malc0de
+import vxvault
+import corpus
 
 _DEBUG = True
 
@@ -50,7 +52,7 @@ def main():
 
 	###################################################################
 	print "\n\nMALSHARE STARTS HERE\n\n"
-#	malshare.main()	
+	malshare.main()	
 	print "----"
 
 	###################################################################
@@ -59,8 +61,16 @@ def main():
 	print "----"
 
 	###################################################################
+	print "\n\VXVAULT STARTS HERE\n\n"
+	vxvault.main()	
+	print "----"
 
+	###################################################################
+	print "\n\CORPUS STARTS HERE\n\n"
+	corpus.main()	
+	print "----"
 
+	###################################################################
 
 if __name__ == "__main__":
 	main()
