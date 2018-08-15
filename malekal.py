@@ -70,7 +70,7 @@ def downloadSamples():
 						#print hashes
 						print "INSERTING"
 						isDetected = False
-						ScanResult = commonFunctions.yaraScan()
+						ScanResult = commonFunctions.yaraScan(newFile)
 						if ScanResult != None:
 							print "detected"
 							isDetected = True

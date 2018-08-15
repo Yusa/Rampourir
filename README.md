@@ -15,9 +15,7 @@ Automated malware collection and classification with signature based scan.
 
 ### Yara rule sources
 
-* [Yara-Rules](https://github.com/Yara-Rules/rules)
-* [Neo23xO](https://github.com/Neo23x0/signature-base/tree/master/yara)
-* [kevthehermit](https://github.com/kevthehermit/RATDecoders/tree/master/yaraRules)
+* [Yara-Rules](https://github.com/Yara-Rules/rules) => Added
 
 ### Workflow of YARA rule collection
 

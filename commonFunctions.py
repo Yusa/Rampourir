@@ -4,14 +4,16 @@ import hashlib
 import os
 import progressbar
 import ssdeep
+import yara
 
 _DB_NAME = "veritabani.db"
 _CON = None
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
+_RULE_PATH = os.path.join(_SCRIPT_PATH, "rules/index.yar")
+_RULES = yara.compile(_RULE_PATH)
 
 _HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.109 Safari/537.36'}
-
-_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 SAVEPATH = os.path.join(_SCRIPT_PATH, "Malwares")
 
@@ -64,11 +66,14 @@ def hasher(fname):
     return {"md5": hmd5, "sha256": hsha256, "ssdeep":hssdeep}
 
 
-
-#NOT COMPLETE FUNCTIONS
-def yaraScan():
+def yaraScan(fdir):
+	result = _RULES.match(fdir)
+	if result != []:
+		return str(result)
 	return None
 
+
+#NOT COMPLETE FUNCTIONS
 def checkSsdeep():
 	# it will check every file in database for similarity,
 	# result of comparison with above 90% will be returned as json. 

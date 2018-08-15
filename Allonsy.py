@@ -6,7 +6,7 @@ import malc0de
 import vxvault
 import corpus
 
-_DEBUG = True
+_DEBUG = False
 
 
 def destroy_db():

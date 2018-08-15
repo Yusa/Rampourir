@@ -65,14 +65,22 @@ def main():
 			for i,line in enumerate(hashlist):
 				try:
 					ln = len(hashlist)
-					change_key(i%4)
 					url = "https://malshare.com/api.php?api_key={}&action=getfile&hash={}".format(_API_KEY,line)
 					print '\r', "[*] {}/{} is in process. [*] ".format(i,ln),
 					sys.stdout.flush()
 					cursor.execute("""SELECT * FROM files WHERE sha256sum=?""", (line.strip(),))
 					data = cursor.fetchone()
 					if data == None:
-						if commonFunctions.sampleDownloader(url.strip()):
+						i = 0
+						result = commonFunctions.sampleDownloader(url.strip())
+						while not result:
+							change_key(i)
+							i += 1
+							if i == 4:
+								break
+							result = commonFunctions.sampleDownloader(url.strip())
+
+						if result:
 							oldFile = os.path.join(commonFunctions.SAVEPATH, "temp")
 							hashes = commonFunctions.hasher(oldFile)
 							newFile = os.path.join(commonFunctions.SAVEPATH, str(hashes["md5"]))
@@ -81,7 +89,7 @@ def main():
 							#print hashes
 							print "INSERTING"
 							isDetected = False
-							ScanResult = commonFunctions.yaraScan()
+							ScanResult = commonFunctions.yaraScan(newFile)
 							if ScanResult != None:
 								print "detected"
 								isDetected = True

@@ -42,7 +42,7 @@ def main():
 	#				print hashes
 					print "INSERTING"
 					isDetected = False
-					ScanResult = commonFunctions.yaraScan()
+					ScanResult = commonFunctions.yaraScan(newFile)
 					if ScanResult != None:
 						print ScanResult
 						isDetected = True
