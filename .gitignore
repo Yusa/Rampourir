@@ -2,6 +2,5 @@ intern/
 Malwares/
 configs
 veritabani.db
-sha256Malshare
 *.pyc
-malekalmd5.txt
+*.stamp

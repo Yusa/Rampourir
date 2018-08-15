@@ -8,7 +8,7 @@ import os
 import json
 
 _HEADERS = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
-_HASHFNAME = "sha256Malshare"
+_HASHFNAME = "sha256Malshare.stamp"
 
 with open("configs", "r") as f:
 	CONFS = json.loads(f.read())
@@ -83,7 +83,7 @@ def main():
 							print "INSERTING"
 							isDetected = False
 							ScanResult = commonFunctions.yaraScan()
-							if not commonFunctions:
+							if ScanResult != None:
 								print "detected"
 								isDetected = True
 

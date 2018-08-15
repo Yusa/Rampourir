@@ -2,6 +2,7 @@ import sqlite3
 import os
 import commonFunctions
 import malshare
+import malc0de
 
 _DEBUG = True
 
@@ -35,6 +36,8 @@ def main():
 		clear_dir(commonFunctions.SAVEPATH)
 		destroy_db()
 		create_db()
+		if os.path.exists(malc0de.CHECKFILE):
+			os.remove(malc0de.CHECKFILE)
 
 	if os.path.exists(commonFunctions._DB_NAME):
 		commonFunctions._CON = sqlite3.connect(commonFunctions._DB_NAME)
@@ -47,11 +50,15 @@ def main():
 
 	###################################################################
 	print "\n\nMALSHARE STARTS HERE\n\n"
-	malshare.main()	
+#	malshare.main()	
 	print "----"
 
 	###################################################################
+	print "\n\nMALC0DE STARTS HERE\n\n"
+	malc0de.main()	
+	print "----"
 
+	###################################################################
 
 
 

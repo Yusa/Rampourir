@@ -37,7 +37,7 @@ def sampleDownloader(url):
 	except KeyboardInterrupt:
 		exit()
 	except Exception as e:
-		print e
+		print "Host refused connection = {}".format(url)
 		return False
 	return False
 
@@ -64,5 +64,12 @@ def hasher(fname):
     return {"md5": hmd5, "sha256": hsha256, "ssdeep":hssdeep}
 
 
+
+#NOT COMPLETE FUNCTIONS
 def yaraScan():
+	return None
+
+def checkSsdeep():
+	# it will check every file in database for similarity,
+	# result of comparison with above 90% will be returned as json. 
 	return None

@@ -4,6 +4,7 @@ certifi==2018.8.13
 cffi==1.11.5
 chardet==3.0.4
 cssselect==1.0.3
+feedparser==5.2.1
 idna==2.7
 lxml==4.2.4
 pprint==0.1

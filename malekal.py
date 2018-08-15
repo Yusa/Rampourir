@@ -16,7 +16,7 @@ args = parser.parse_args()
 
 
 _DOWN_URL = "http://malwaredb.malekal.com/files.php?file="
-_HASHFILE = "malekalmd5.txt"
+_HASHFILE = "malekalmd5.stamp"
 _DATE = datetime.date.today()
 
 
@@ -71,7 +71,7 @@ def downloadSamples():
 						print "INSERTING"
 						isDetected = False
 						ScanResult = commonFunctions.yaraScan()
-						if not commonFunctions:
+						if ScanResult != None:
 							print "detected"
 							isDetected = True
 
