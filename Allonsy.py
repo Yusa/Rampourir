@@ -10,12 +10,12 @@ _DEBUG = False
 
 
 def destroy_db():
-	if os.path.exists(commonFunctions._DB_NAME):
-		os.remove(commonFunctions._DB_NAME)
+	if os.path.exists(commonFunctions.DBPATH):
+		os.remove(commonFunctions.DBPATH)
 
 
 def create_db():
-	commonFunctions._CON = sqlite3.connect(commonFunctions._DB_NAME)
+	commonFunctions._CON = sqlite3.connect(commonFunctions.DBPATH)
 	cursor = commonFunctions._CON.cursor()
 	cursor.execute('''CREATE TABLE files
 				(md5sum text, sha256sum text, fname text, isDetected boolean, detection text, date date, ssdeep text, ssdeepSimilar text)''')
@@ -41,8 +41,8 @@ def main():
 		if os.path.exists(malc0de.CHECKFILE):
 			os.remove(malc0de.CHECKFILE)
 
-	if os.path.exists(commonFunctions._DB_NAME):
-		commonFunctions._CON = sqlite3.connect(commonFunctions._DB_NAME)
+	if os.path.exists(commonFunctions.DBPATH):
+		commonFunctions._CON = sqlite3.connect(commonFunctions.DBPATH)
 	else:
 		create_db()
 

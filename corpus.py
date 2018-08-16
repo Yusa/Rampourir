@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import os
 import sqlite3
-import commonFunctions
+import commonFunctions, ssdeepcheck
 import sys
 import requests
 import datetime
@@ -51,10 +51,10 @@ def main():
 					if ScanResult != None:
 						print ScanResult
 						isDetected = True
-					ssdeepResult = commonFunctions.checkSsdeep()
 
 					c.execute("""INSERT INTO files values (?, ?, ?, ?, ?, ?, ?, ?)""", (hashes["md5"], hashes["sha256"], newFile, isDetected, ScanResult, _DATE, hashes["ssdeep"], None))
 					commonFunctions._CON.commit()
+					ssdeepcheck.ssdeepNewEntry(hashes["md5"], hashes["ssdeep"])
 
 	commonFunctions._CON.close()	
 

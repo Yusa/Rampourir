@@ -71,10 +71,3 @@ def yaraScan(fdir):
 	if result != []:
 		return str(result)
 	return None
-
-
-#NOT COMPLETE FUNCTIONS
-def checkSsdeep():
-	# it will check every file in database for similarity,
-	# result of comparison with above 90% will be returned as json. 
-	return None

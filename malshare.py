@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import pprint
 import datetime
-import commonFunctions
+import commonFunctions, ssdeepcheck
 import sys
 import os 
 import json
@@ -96,6 +96,7 @@ def main():
 
 							cursor.execute("""INSERT INTO files values (?, ?, ?, ?, ?, ?, ?, ?)""", (hashes["md5"], hashes["sha256"], newFile, isDetected, ScanResult, _DATE, hashes["ssdeep"], None))
 							commonFunctions._CON.commit()
+							ssdeepcheck.ssdeepNewEntry(hashes["md5"], hashes["ssdeep"])
 
 				except Exception as e:
 					print e
