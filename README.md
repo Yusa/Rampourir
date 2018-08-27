@@ -2,6 +2,12 @@
 
 Automated malware collection and classification with signature based scan.
 
+Main script is Allonsy.py, it collects the malwares from specified sources below and scans them with the existing rules, checks ssdeep values with the existing malwares in the database, when 90% or upper match is found, it is written to database. 
+
+It saves the collected malwares under $PWD\Malwares path and creates Sqlite3 database for the malwares as in the image below.
+![Database Image](images/database.png)
+
+
 ### Malware Sources
 
 * [Malshare](https://malshare.com) => Added
@@ -9,8 +15,6 @@ Automated malware collection and classification with signature based scan.
 * [VX-Vault](http://vxvault.net/ViriList.php) => Added
 * [Tracker-h3x](http://tracker.h3x.eu/about/400) => Added
 * [Malakel](http://malwaredb.malekal.com/index.php?page=1) => It is not being updated (Cumulative downloader will be written for contribution to database) => Added
-* [Any.Run](https://app.any.run/submissions)
-* [Hybrid Analysis](https://hybrid-analysis.com)
 * [Cybercrime-Tracker](https://cybercrime-tracker.net/) => canceled, not up to date
 
 ### Yara rule sources
@@ -30,7 +34,6 @@ Automated malware collection and classification with signature based scan.
 * Pulled samples will be scanned with yara rules and detections will be saved database.
 
 
-#### Possible additional features
+#### TO-DO
 
-* All samples' ssdeep values can be written into database and **undetected** samples' ssdeep values can be compared to detected ones.
-* 
+* Yara scanner script will be implemented for scanning existing malwares when there is a new rule added. 
