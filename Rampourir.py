@@ -5,6 +5,7 @@ import readline
 import sqlite3
 from tabulate import tabulate
 import json
+import yara
 
 readline.parse_and_bind('tab: complete')
 readline.parse_and_bind('set editing-mode vi')
@@ -20,6 +21,7 @@ SET DB	<path>			set the path to database the malwares are stored
 SEARCH <hash> <hash> <hash>	to search files with hash
 SHOW PATH			to show the current selected path for malwares to analyze
 LIST				to list the files
+ADD RULE <path>			to add a new rule
 CLEAR				to clear screen
 EXIT				to exit
 """
@@ -143,6 +145,33 @@ try:
 				print "There are {} files...\n".format(len(myList))
 			else:
 				print "Please give the path to database\n\tSET PATH <FullPath>"
+
+		#=========================================================================================================
+		#CLEAR screen
+		elif len(command) >= 2 and command[0].upper() == "ADD" and command[1].upper() == "RULE":
+			if len(command) == 3:
+				if os.path.exists(command[2]):
+					rules = yara.compile(command[2])
+					if defaultDb:
+						c = defaultConn.cursor()
+						c.execute("""SELECT * FROM files WHERE isDetected = 0""")
+						myList = c.fetchall()
+						for elem in myList:
+							if os.path.exist(str(elem[2])):
+								yaraResult = rules.match(str(elem[2]))
+								if yaraResult != []:
+									c.execute("""UPDATE files SET detection=(?) WHERE md5sum=(?)""", (str(yaraResult), elem[0],))
+					
+						with open("rules/newrules.yar", "a") as fa:
+							with open(command[2], "r") as fr:
+								fa.write(fr.read())
+
+					else:
+						print "Please specify database path"
+				else:
+					print "Path doesn't exist, Please specify valid path"
+			else:
+				print "Please specify the path to new ruleset file.\n\tADD RULE <PATH>"
 
 		#=========================================================================================================
 		#CLEAR screen
