@@ -47,7 +47,3 @@ It also shows the similar samples if there is any.
 * If sample doesn't exist in database it will be pulled.
 * Pulled samples will be scanned with yara rules and detections will be saved database.
 
-
-#### TO-DO
-
-* Yara scanner script will be implemented for scanning existing malwares when there is a new rule added. 
