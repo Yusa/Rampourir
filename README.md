@@ -8,6 +8,20 @@ It saves the collected malwares under $PWD\Malwares path and creates Sqlite3 dat
 ![Database Image](images/database.png)
 
 
+
+### Managing Collected Samples
+
+#### Rampourir.py
+
+You can list samples collected. You can search for a sample, with md5 or sha256.
+
+![Sample Search](images/detected.png)
+
+It also shows the similar samples if there is any.
+
+![Sample Search 2](images/ssdeep-search.png)
+
+
 ### Malware Sources
 
 * [Malshare](https://malshare.com) => Added
