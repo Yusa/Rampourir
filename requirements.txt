@@ -6,7 +6,7 @@ chardet==3.0.4
 cssselect==1.0.3
 feedparser==5.2.1
 idna==2.7
-lxml==4.2.4
+lxml==4.6.2
 numpy==1.13.1
 pandas==0.20.3
 pprint==0.1
