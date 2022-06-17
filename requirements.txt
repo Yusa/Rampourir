@@ -7,7 +7,7 @@ cssselect==1.0.3
 feedparser==5.2.1
 idna==2.7
 lxml==4.2.4
-numpy==1.13.1
+numpy==1.21.0
 pandas==0.20.3
 pprint==0.1
 progressbar==2.5
